@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <form method="POST" action="{{ url_for('signup') }}">
+    <label>Username:</label><br>
+    <input type="text" name="username"><br>
+    <label>Email:</label><br>
+    <input type="email" name="email"><br>
+    <label>Password:</label><br>
+    <input type="password" name="password"><br>
+    <label>Confirm Password:</label><br>
+    <input type="password" name="confirm"><br><br>
+    <input type="submit" value="Sign Up">
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li style="color: {% if category == 'danger' %}red{% elif category == 'success' %}green{% else %}black{% endif %};">
+            {{ message }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard, {{ user.username }}!</h1>
+    <p>{{ additional_content }}</p>
+    
+    <h2>Your Profile</h2>
+    <ul>
+        <li>Email: {{ user.email }}</li>
+        <li>Bio: {{ user.bio }}</li>
+        <li>Gender: {{ user.gender }}</li>
+        <li>Age: {{ user.age or 'Not Provided' }}</li>
+        <li>Location: {{ user.location }}</li>
+        <li>Role: {{ user.role }}</li>
+    </ul>
+    {% if user.profile_picture %}
+        <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="100">
+    {% endif %}
+    
+    <hr>
+    <h2>Other Users</h2>
+    {% if users %}
+        <ul>
+            {% for other in users %}
+                <li>{{ other.username }} - {{ other.email }} - Role: {{ other.role }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No other users found.</p>
+    {% endif %}
+    
+    <hr>
+    <p><a href="{{ url_for('profile') }}">Edit Your Profile</a></p>
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>

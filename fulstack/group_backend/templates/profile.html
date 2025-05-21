@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Edit Your Profile</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Username:</label><br>
+        <input type="text" name="username" value="{{ user.username }}" required><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ user.email }}" required><br>
+        
+        <label>Bio:</label><br>
+        <textarea name="bio">{{ user.bio }}</textarea><br>
+        
+        <label>New Password:</label><br>
+        <input type="password" name="password"><br>
+        
+        <label>Profile Picture:</label><br>
+        <input type="file" name="profile_picture"><br>
+        {% if user.profile_picture %}
+            <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="100">
+        {% endif %}
+        <br>
+        
+        <label>Gender:</label><br>
+        <select name="gender">
+            <option value="Not Specified" {% if user.gender == "Not Specified" %}selected{% endif %}>Not Specified</option>
+            <option value="Male" {% if user.gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if user.gender == "Female" %}selected{% endif %}>Female</option>
+            <option value="Other" {% if user.gender == "Other" %}selected{% endif %}>Other</option>
+        </select><br>
+        
+        <label>Age:</label><br>
+        <input type="number" name="age" value="{{ user.age or '' }}"><br>
+        
+        <label>Location:</label><br>
+        <input type="text" name="location" value="{{ user.location }}"><br><br>
+        
+        <input type="submit" value="Update Profile">
+    </form>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li style="color: {% if category == 'danger' %}red{% elif category == 'success' %}green{% else %}black{% endif %};">
+              {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>

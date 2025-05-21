@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <nav>
+      <a href="{{ url_for('login') }}">Login</a> |
+      <a href="{{ url_for('signup') }}">Sign Up</a> |
+      <a href="{{ url_for('members.members_home') }}">Members</a> |
+      <a href="{{ url_for('subscribers.subscribers_home') }}">Subscribers</a>
+    </nav>
+</body>
+</html>
