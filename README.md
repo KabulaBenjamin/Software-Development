@@ -33,7 +33,4 @@ Welcome to my **Software Development** portfolio repository! This repository sho
 
 ---
 
-## 📁 Project Structure
-
-Here's how this repository is organized:
 
